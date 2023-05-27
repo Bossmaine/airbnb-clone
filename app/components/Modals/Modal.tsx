@@ -66,11 +66,11 @@ const Modal: React.FC<ModalPorops> = ({
 
   return (
     <>
-      <div className="flex items-center justify-center overflow-x-hidden overflow-y-hidden 
-      fixed outline-none inset-0 z-50 bg-neutral-800/70  focus:outline-none ">
-        <div className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
+      <div className="flex items-center justify-center overflow-x-hidden overflow-y-auto 
+      fixed outline-none inset-0 z-50 bg-neutral-800/70  focus:outline-none">
+        <div className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-auto lg:h-auto md:h-auto pt-16 md:pt-10">
             {/* Content */}
-            <div className={`translate duration-300 h-full ${showModal ? 'translate-y-0' : 'translate-y-full'}
+            <div className={`translate duration-300 h-auto ${showModal ? 'translate-y-0' : 'translate-y-full'}
             ${showModal ? 'opacity-100' : 'opacity-0'}`}>
                 <div className=" relative flex flex-col translate h-full lg:h-auto md:h-auto border-0 
                 rounded-lg w-full bg-white outline-none focus:outline-none shadow-lg ">
@@ -91,10 +91,11 @@ const Modal: React.FC<ModalPorops> = ({
                     <div className="flex flex-col gap-2 p-6">
                         <div className=" flex flex-row items-center w-full gap-4">
                             {secondaryAction && secondaryActionLabel && (
-                            <Button outline disabled={disabled} label={secondaryActionLabel} onClick={handleSubmit}  />
+                            <Button outline disabled={disabled} label={secondaryActionLabel} onClick={handleSecondaryAction}  />
                             )}
                             <Button disabled={disabled} label={actionLabel} onClick={handleSubmit}  />
                         </div>
+                        {footer}
                     </div>
                 </div>
             </div>
