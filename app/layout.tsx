@@ -4,6 +4,8 @@ import Navbar from './components/Navbar/Navbar'
 import ClienOnlyComponent from './components/ClienOnlyComponent'
 import RegisterModal from './components/Modals/RegisterModal'
 import ToasterProvide from './Providers/ToasterProvide'
+import LoginModal from './components/Modals/LoginModal'
+import getCurrentUser from './actions/getCurrentUser'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -12,18 +14,20 @@ export const metadata = {
   description: 'A clone of Airbnb',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const currentUser = await getCurrentUser();
   return (
     <html lang="en">
       <body className={nunito.className}>
         <ClienOnlyComponent>
           <ToasterProvide />
+          <LoginModal />
           <RegisterModal />
-          <Navbar />
+          <Navbar currentUser={currentUser} />
         </ClienOnlyComponent> 
         {children}
       </body>

@@ -11,12 +11,12 @@ export const authOptions: AuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
-            clientSecret: process.env.GOOGLE_SECRET as string
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
         }), 
 
         FacebookProvider({
             clientId: process.env.FACEBOOK_ID as string,
-            clientSecret: process.env.FACEBOOK_SECRET as string
+            clientSecret: process.env.FACEBOOK_VERSION as string
         }), 
 
         CredentialsProvider({
