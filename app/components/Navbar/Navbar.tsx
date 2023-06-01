@@ -1,4 +1,5 @@
 import Container from "../Container"
+import Categories from "./Categories"
 import Logo from "./Logo"
 import Menu from "./Menu"
 import Search from "./Search"
@@ -20,6 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({currentUser}) => {
                     </div>
                 </Container>
             </div>
+            <Categories />
         </div>
     )
 }
