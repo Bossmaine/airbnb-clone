@@ -8,6 +8,7 @@ import useRegisterModal from '@/app/Hooks/useRegisterModal';
 import useLoginModal from '@/app/Hooks/useLoginModal';
 import { signOut } from 'next-auth/react';
 import { SafeUser } from '@/app/Types/Index';
+import useRentModal from '@/app/Hooks/useRentModal';
 
 interface MenuProps {
     currentUser?: SafeUser | null
@@ -16,16 +17,25 @@ interface MenuProps {
 const Menu: React.FC<MenuProps> = ({currentUser}) => {
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
+    const rentModal = useRentModal()
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenuOpen = useCallback(() => {
         setIsMenuOpen(!isMenuOpen);
     }, [isMenuOpen])
 
+    const onRent = useCallback(() =>{
+        if(!currentUser) {
+            return loginModal.onOpen();
+        }
+        
+        return rentModal.onOpen();
+    }, [currentUser, loginModal, rentModal])
+
     return (
         <div className="realtive">
             <div className=" flex flex-row items-center gap-3" >
-                <div onClick={() => {}} className="hidden md:block py-3 px-4 text-sm
+                <div onClick={onRent} className="hidden md:block py-3 px-4 text-sm
                  rounded-full font-semibold hover:bg-neutral-100 transition cursor-pointer"> 
                     Airbnb your home
                 </div>
@@ -47,7 +57,7 @@ const Menu: React.FC<MenuProps> = ({currentUser}) => {
                                 <MenuItem onClick={() => {}} label='Favorites' />
                                 <MenuItem onClick={() => {}} label='Reservations' />
                                 <MenuItem onClick={() => {}} label='My Properties' />
-                                <MenuItem onClick={() => {}} label='Airbnb your home' />
+                                <MenuItem onClick={rentModal.onOpen} label='Airbnb your home' />
                                 <hr />
                                 <MenuItem onClick={() => signOut()} label='Logout' />
                             </>
